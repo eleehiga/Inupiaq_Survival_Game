@@ -3,7 +3,7 @@ import sys, pygame
 class Old_Man:
   speed = [2, 2]
   size = 50, 50 
-  velocity = 10
+  velocity = 0.1
 
   def __init__(self, x, y):
     self.image = pygame.transform.scale(pygame.image.load("old_man.jpg"), self.size)

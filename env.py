@@ -11,4 +11,5 @@ class Env:
     self.screen.fill(self.black)
 
   def disp_obj(self, obj):
+    self.screen.fill(self.black) # to reset background
     self.screen.blit(obj.image, (obj.x, obj.y))
