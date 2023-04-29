@@ -1,12 +1,28 @@
 import sys, pygame
 from env import Env
 from old_man import Old_Man
+from village import Village
+from whale import Whale
+from driftwood import Driftwood
 
 pygame.init()
 
 env = Env()
 
 old_man = Old_Man(env.screen_width/2, env.screen_height/2)
+village = Village(env.land_wcorner+env.land_width/2,env.land_hcorner+env.land_height)
+whale = Whale((env.screen_width+env.land_wcorner+env.land_width)/2, env.screen_height/2)
+
+env.disp_obj(old_man)
+# spawn old man to middle of the screen
+env.disp_obj(village)
+env.disp_obj(whale)
+
+trees = []
+for i in range(5):
+    obj_tree = Driftwood(env.spawn_driftwood_x(), env.spawn_driftwood_y())
+    trees.append(obj_tree)
+    env.disp_obj(obj_tree)
 
 while True:
   for event in pygame.event.get():
@@ -27,8 +43,13 @@ while True:
     if(old_man.y < env.land_hcorner + env.land_height - old_man.height):
         old_man.m_down()
             
+  env.rst_bg()
   env.disp_obj(old_man)
   # spawn old man to middle of the screen
+  env.disp_obj(village)
+  env.disp_obj(whale)
+  for tree in trees:
+      env.disp_obj(tree)
   
     
   pygame.display.update()

@@ -2,8 +2,8 @@ import sys, pygame
 
 class Whale:
   speed = [2, 2]
-  width = 50
-  height = 50
+  width = 70
+  height = 70
   size = width, height 
   velocity = 0.1
 
