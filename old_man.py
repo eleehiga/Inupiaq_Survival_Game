@@ -8,10 +8,10 @@ class Old_Man:
   velocity = 0.1
 
   # invetory
-  self.sticks
+  sticks = 0
 
   def __init__(self, x, y):
-    self.image = pygame.transform.scale(pygame.image.load("old_man.jpg"), self.size)
+    self.image = pygame.transform.scale(pygame.image.load("pictures/old_man.jpg"), self.size)
     self.image_rect = self.image.get_rect()
     self.x = x
     self.y = y

@@ -8,7 +8,7 @@ class Whale:
   velocity = 0.1
 
   def __init__(self, x, y):
-    self.image = pygame.transform.scale(pygame.image.load("whale.jpg"), self.size)
+    self.image = pygame.transform.scale(pygame.image.load("pictures/whale.jpg"), self.size)
     self.image_rect = self.image.get_rect()
     self.x = x
     self.y = y
