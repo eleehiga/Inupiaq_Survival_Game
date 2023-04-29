@@ -5,6 +5,7 @@ from village import Village
 from whale import Whale
 from driftwood import Driftwood
 from boat import Boat
+from timeit import default_timer
 
 pygame.init()
 
@@ -27,6 +28,9 @@ for i in range(5):
     trees.append(obj_tree)
     env.disp_obj(obj_tree)
 
+# start game time
+start = default_timer()
+
 while True:
   for event in pygame.event.get():
     if event.type == pygame.QUIT: sys.exit()
@@ -37,26 +41,42 @@ while True:
     if(land_mode):
       if(old_man.x > env.land_wcorner):
         old_man.m_left() # will move only if in the land area
+    else:
+      if(env.can_boat_left(boat)):
+        boat.m_left()
   if key_pressed_is[pygame.K_d]:
     if(land_mode):
       if(old_man.x < env.land_wcorner + env.land_width - old_man.width):
         old_man.m_right()
+    else:
+      if(env.can_boat_right(boat)):
+        boat.m_right()
   if key_pressed_is[pygame.K_w]:
     if(land_mode):
       if(old_man.y > env.land_hcorner):
         old_man.m_up()
+    else:
+      if(env.can_boat_up(boat)):
+        boat.m_up()
   if key_pressed_is[pygame.K_s]:
     if(land_mode):
       if(old_man.y < env.land_hcorner + env.land_height - old_man.height):
         old_man.m_down()
+    else:
+      if(env.can_boat_down(boat)):
+        boat.m_down()
   # if attack button
   if key_pressed_is[pygame.K_o]:
     env.destroy_wood(old_man,trees)
   # place button
   if key_pressed_is[pygame.K_p]:
-    if(land_mode):
+    if(land_mode and old_man.sticks>=3):
       env.ride_boat(old_man,boat)
       land_mode = False
+    if(not(land_mode)):
+      if(env.kill_whale(boat,whale)):
+        print("You completed the game in: "+str(int(default_timer()-start))+" seconds")
+        exit()
             
   env.rst_bg()
   env.disp_obj(old_man)
@@ -66,6 +86,5 @@ while True:
   env.disp_obj(whale)
   for tree in trees:
       env.disp_obj(tree)
-  
     
   pygame.display.update()

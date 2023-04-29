@@ -5,7 +5,7 @@ class Boat:
   width = 50
   height = 50
   size = width, height 
-  velocity = 0.5
+  velocity = 1
 
   def __init__(self, x, y):
     self.image = pygame.transform.scale(pygame.image.load("pictures/boat.jpg"), self.size)

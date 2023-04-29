@@ -15,6 +15,7 @@ class Env:
   driftwood_rects = []
   old_man_x = -100
   old_man_y = -100
+  from_shore = 5
 
   def __init__(self):
     self.screen = pygame.display.set_mode(self.size)
@@ -82,3 +83,20 @@ class Env:
            boat.y -= 1.1*boat.height
          old_man.x = -100
          old_man.y = -100
+  def in_ocean(self, x,y, boat):
+      return not(x > self.land_wcorner-boat.width and x < self.land_wcorner+self.land_width and y > self.land_hcorner-boat.height and y < self.land_hcorner+self.land_height)
+  def can_boat_left(self,boat):
+      return self.in_ocean(boat.x-self.from_shore,boat.y,boat)
+  def can_boat_right(self,boat):
+      return self.in_ocean(boat.x+self.from_shore,boat.y,boat)
+  def can_boat_up(self,boat):
+      return self.in_ocean(boat.x,boat.y-self.from_shore,boat)
+  def can_boat_down(self,boat):
+      return self.in_ocean(boat.x,boat.y+self.from_shore,boat)
+  def kill_whale(self,boat,whale):
+      if(whale.x > boat.x and whale.x < boat.x + boat.width and whale.y > boat.y and whale.y < boat.y + boat.height):
+            whale.x = -200
+            whale.y = -200
+            print("You killed the whale and now your village will accept you again!")
+            return True
+      return False

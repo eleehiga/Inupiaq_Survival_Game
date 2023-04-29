@@ -1,8 +1,8 @@
 import sys, pygame
 
 class Village:
-  width = 100
-  height = 100
+  width = 150
+  height = 150
   size = width, height 
 
   def __init__(self, x, y):
