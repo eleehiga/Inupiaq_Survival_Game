@@ -2,7 +2,9 @@ import sys, pygame
 
 class Old_Man:
   speed = [2, 2]
-  size = 50, 50 
+  width = 50
+  height = 50
+  size = width, height 
   velocity = 0.1
 
   def __init__(self, x, y):
