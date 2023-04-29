@@ -11,6 +11,7 @@ class Env:
   white  = 255, 255, 255
   # rectangles absolute then relative for where an object is
   taken = []
+  driftwood_rects = []
 
   def __init__(self):
     self.screen = pygame.display.set_mode(self.size)
@@ -24,7 +25,8 @@ class Env:
     self.screen.fill(self.white, self.rect) # set part of screen to white
   def disp_obj(self, obj):
     self.screen.blit(obj.image, (obj.x, obj.y))
-    self.taken.append([obj.x, obj.y, obj.x+obj.width, obj.y+obj.height])
+    obj_rect = [obj.x, obj.y, obj.x+obj.width, obj.y+obj.height]
+    self.taken.append(obj_rect)
   def conflict_x(self, x):
     for take in self.taken:
         if(x > take[0] and x < take[2]):
@@ -37,15 +39,23 @@ class Env:
     return False
   def spawn_in_land_x(self):
     x = -1
-    while x == -1 or not(self.conflict_x(x)):
+    # complete the loop if true in loop
+    while x == -1 or self.conflict_x(x):
       x = random.randint(int(1.00*self.land_wcorner),int(0.95*(self.land_wcorner+self.land_width)))
     return x
   def spawn_in_land_y(self):
     y = -1
-    while y == -1 or not(self.conflict_y(y)):
+    while y == -1 or self.conflict_y(y):
       y = random.randint(int(1.00*self.land_hcorner),int(0.95*(self.land_hcorner+self.land_height)))
     return y 
   def spawn_driftwood_x(self):
     return self.spawn_in_land_x()
   def spawn_driftwood_y(self):
     return self.spawn_in_land_y()
+  def destroy_wood(self, old_man, trees):
+    for tree in trees:
+        if(tree.x > old_man.x and tree.x < old_man.x + old_man.width and tree.y > old_man.y and tree.y < old_man.y + old_man.height):
+            tree.x = -100
+            tree.y = -100
+            old_man.sticks += 1
+            print("obtained 1 stick")

@@ -42,6 +42,10 @@ while True:
   if key_pressed_is[pygame.K_s]:
     if(old_man.y < env.land_hcorner + env.land_height - old_man.height):
         old_man.m_down()
+  # if attack button
+  if key_pressed_is[pygame.K_o]:
+    env.destroy_wood(old_man,trees)
+
             
   env.rst_bg()
   env.disp_obj(old_man)

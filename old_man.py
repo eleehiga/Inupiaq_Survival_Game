@@ -5,7 +5,7 @@ class Old_Man:
   width = 50
   height = 50
   size = width, height 
-  velocity = 0.1
+  velocity = 0.5
 
   # invetory
   sticks = 0
