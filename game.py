@@ -54,13 +54,15 @@ while True:
     env.destroy_wood(old_man,trees)
   # place button
   if key_pressed_is[pygame.K_p]:
-    env.ride_boat(old_man,boat)
-
+    if(land_mode):
+      env.ride_boat(old_man,boat)
+      land_mode = False
             
   env.rst_bg()
   env.disp_obj(old_man)
   # spawn old man to middle of the screen
   env.disp_obj(village)
+  env.disp_obj(boat)
   env.disp_obj(whale)
   for tree in trees:
       env.disp_obj(tree)

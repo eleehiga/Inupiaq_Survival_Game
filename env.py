@@ -1,5 +1,6 @@
 import sys, pygame
 import random
+import copy
 
 class Env:
   screen_width = 840
@@ -62,7 +63,22 @@ class Env:
             old_man.sticks += 1
             print("obtained 1 stick")
   def ride_boat(self, old_man, boat):
-      if(old_man.x < 1.01*self.land_wcorner or old_man.y < 1.01*self.land_hcorner or old_man.x > self.land_wcorner+self.land_width-1.1*old_man.width or old_man.y > self.land_hcorner+self.land_height-1.1*old_man.height):
-         old_man_x = old_man.x
-         old_man_y = old_man.y
-         print("riding an umiak",old_man_x)
+      past_left = old_man.x < 1.01*self.land_wcorner
+      past_up = old_man.y < 1.01*self.land_hcorner
+      past_right = old_man.x > self.land_wcorner+self.land_width-1.1*old_man.width
+      past_down = old_man.y > self.land_hcorner+self.land_height-1.1*old_man.height
+      if(past_left or past_right or past_up or past_down):
+         old_man_x = copy.copy(old_man.x)
+         old_man_y = copy.copy(old_man.y)
+         boat.x = old_man_x
+         boat.y = old_man_y
+         if(past_right):
+           boat.x += 1.1*boat.width
+         if(past_down):
+           boat.y += 1.1*boat.height
+         if(past_left):
+           boat.x -= 1.1*boat.width
+         if(past_up):
+           boat.y -= 1.1*boat.height
+         old_man.x = -100
+         old_man.y = -100
