@@ -5,7 +5,7 @@ pygame.init()
 
 env = Env()
 
-old_man = Old_Man(env.width/2, env.height/2)
+old_man = Old_Man(env.screen_width/2, env.screen_height/2)
 
 
 while True:
