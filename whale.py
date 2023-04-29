@@ -1,17 +1,14 @@
 import sys, pygame
 
-class Old_Man:
+class Whale:
   speed = [2, 2]
   width = 50
   height = 50
   size = width, height 
   velocity = 0.1
 
-  # invetory
-  self.sticks
-
   def __init__(self, x, y):
-    self.image = pygame.transform.scale(pygame.image.load("old_man.jpg"), self.size)
+    self.image = pygame.transform.scale(pygame.image.load("whale.jpg"), self.size)
     self.image_rect = self.image.get_rect()
     self.x = x
     self.y = y
