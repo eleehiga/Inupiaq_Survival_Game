@@ -12,6 +12,8 @@ class Env:
   # rectangles absolute then relative for where an object is
   taken = []
   driftwood_rects = []
+  old_man_x = -100
+  old_man_y = -100
 
   def __init__(self):
     self.screen = pygame.display.set_mode(self.size)
@@ -41,12 +43,12 @@ class Env:
     x = -1
     # complete the loop if true in loop
     while x == -1 or self.conflict_x(x):
-      x = random.randint(int(1.00*self.land_wcorner),int(0.95*(self.land_wcorner+self.land_width)))
+      x = random.randint(int(1.01*self.land_wcorner),int(0.95*(self.land_wcorner+self.land_width)))
     return x
   def spawn_in_land_y(self):
     y = -1
     while y == -1 or self.conflict_y(y):
-      y = random.randint(int(1.00*self.land_hcorner),int(0.95*(self.land_hcorner+self.land_height)))
+      y = random.randint(int(1.01*self.land_hcorner),int(0.95*(self.land_hcorner+self.land_height)))
     return y 
   def spawn_driftwood_x(self):
     return self.spawn_in_land_x()
@@ -59,3 +61,8 @@ class Env:
             tree.y = -100
             old_man.sticks += 1
             print("obtained 1 stick")
+  def ride_boat(self, old_man, boat):
+      if(old_man.x < 1.01*self.land_wcorner or old_man.y < 1.01*self.land_hcorner or old_man.x > self.land_wcorner+self.land_width-1.1*old_man.width or old_man.y > self.land_hcorner+self.land_height-1.1*old_man.height):
+         old_man_x = old_man.x
+         old_man_y = old_man.y
+         print("riding an umiak",old_man_x)
